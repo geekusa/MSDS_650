@@ -1,0 +1,58 @@
+\documentclass[10pt]{article}
+\usepackage[usenames]{color} %used for font color
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage[utf8]{inputenc} %useful to type directly diacritic characters
+\usepackage[letterpaper, portrait, margin=1.5in]{geometry}
+\usepackage{graphicx,wrapfig}
+\usepackage{booktabs}
+\usepackage{multicol}
+\begin{document}
+\subsection*{MSDS650 Week 2 EDA Assignment - Nathan Worsham}
+For this assignment I was interested in using a data set that I had created at work which was login information for the website agents.pinnacol.com using Splunk to output the raw data as a table to csv file.
+Data is from June 22, 2015 through October 26, 2015 (127 days of data).
+The data included (all date and time data represents when the session started or was attempted), time, the hour of the day (military time), the day of the week, the email address, http status code (200 successful or 401 failed), IP address of the client, and geo information (location, longitude, and latitude) for the ip address (if applicable, as some IPs only get a location of the US).
+\subsection*{Summary Stats}
+\begin{table}[h!]
+  \begin{center}
+    \scriptsize
+    \begin{tabular}{ll}
+      \toprule
+      paramater & value\\
+      \midrule
+Date of events & 06/23/2015 - 10/28/2015\\
+Span of days & 128\\
+Total logins & 44117\\
+Unique accounts with successful login & 2197\\
+Avg successful logins per day & 468\\
+Avg failed logins per day & 73\\
+\bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+\subsection*{Successful vs Failed Logins}
+\begin{table}[h!]
+  \begin{center}
+    \scriptsize
+    \begin{tabular}{llll}
+      \toprule
+      Stat & Success & Fail\\
+      \midrule
+      Min Hour & 0.00 & 0.00\\
+      1st Qu Hour & 9.00 & 9.00\\
+      Median Hour & 11.0 & 11.0\\
+      Mean Hour & 11.5 & 11.57\\
+      3rd Qu Hour & 14.0 & 14.0\\
+      Max Hour & 23.0 & 23.0\\
+      monday & 12672 & 1957\\
+      tuesday & 12313 & 1938\\
+      wednesday & 12049 & 1823\\
+      thursday & 11942 & 1832\\
+      friday & 10014 & 1550\\
+      saturday & 215 & 62\\
+      sunday & 172 & 44\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+\end{document}
