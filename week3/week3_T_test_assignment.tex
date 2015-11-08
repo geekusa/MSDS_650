@@ -1,0 +1,70 @@
+\documentclass[10pt]{article}
+\usepackage[usenames]{color} %used for font color
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage[utf8]{inputenc} %useful to type directly diacritic characters
+\usepackage[letterpaper, portrait, margin=1.5in]{geometry}
+\usepackage{graphicx,wrapfig}
+\begin{document}
+\subsection*{MSDS650 Week 3 T-Test Assignment - Nathan Worsham}
+Two sets of paired samples created (before and after) made on the same athletes before and after the new training. The null hypothesis is that the training makes no "significant improvement (or deterioration)".
+\begin{verbatim}
+> before = c(12.9, 13.5, 12.8, 15.6, 17.2, 19.2, 12.6, 15.3, 14.4, 11.3)
+> after = c(12.7, 13.6, 12.0, 15.2, 16.8, 20.0, 12.0, 15.9, 16.0, 11.1)
+\end{verbatim}
+Running the test on the sets, using the setting \verb|paired=TRUE| indicating to use a paired t-test:
+\begin{verbatim}
+> t.test(before,after, paired=TRUE)
+
+	Paired t-test
+
+data:  before and after
+t = -0.21331, df = 9, p-value = 0.8358
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.5802549  0.4802549
+sample estimates:
+mean of the differences 
+                  -0.05 
+\end{verbatim}
+Since the p value is well above 0.05, we can accept the null hypothesis that the training did not make any improvement worthy of significance. \\
+To add strength to the conclusion, also the t-tabulated value can be compared to the t-computed (-0.21331) value. To calculate the t-tabulated value using the qt command which is a quantile function for the t distribution. It takes an argument of probability and degrees of freedom (which was 9 from the t.test). The example given chooses 97.5\% probability, I assume because it wanted a higher confidence than 95\%:
+\begin{verbatim}
+> qt(0.975, 9)
+[1] 2.262157
+\end{verbatim}
+So we have a t-computed (-0.21331) is much less than t-tabulated (2.262157), so again the null hypothesis can be accepted.\\
+Now a new coach has been hired and new results recorded. The alternative hypothesis is to be tested using the option \verb|alt = "less"|. This checks if the mean of before is "less" than the mean of after.
+\begin{verbatim}
+> before = c(12.9, 13.5, 12.8, 15.6, 17.2, 19.2, 12.6, 15.3, 14.4, 11.3)
+> after = c(12.0, 12.2, 11.2, 13.0, 15.0, 15.8, 12.2, 13.4, 12.9, 11.0)
+> t.test(before,after, paired=TRUE, alt="l")
+
+	Paired t-test
+
+data:  before and after
+t = 5.2671, df = 9, p-value = 0.9997
+alternative hypothesis: true difference in means is less than 0
+95 percent confidence interval:
+     -Inf 2.170325
+sample estimates:
+mean of the differences 
+                   1.61
+\end{verbatim}
+With a p value of 0.9997 (much bigger than 0.05), the null hypothesis is rejected and  the alternate hypothesis can be accepted that the new training significantly makes improvements.\\
+To show what would have happened if the alternative hypothesis was that the mean of before was \textit{greater} than after:
+\begin{verbatim}
+
+	Paired t-test
+
+data:  before and after
+t = 5.2671, df = 9, p-value = 0.0002579
+alternative hypothesis: true difference in means is greater than 0
+95 percent confidence interval:
+ 1.049675      Inf
+sample estimates:
+mean of the differences 
+                   1.61 
+\end{verbatim}
+The result is much lower than 0.05 at 0.0002579, so the null hypothesis can be accepted--the mean of before is not greater than after.
+\end{document}
