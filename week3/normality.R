@@ -87,9 +87,20 @@ my.data <- my.data[which(my.data < 3 & my.data > -3)]
 my.data <- c(my.data, my.data.2[which(my.data.2 < -3 | my.data.2 > 3)])
 p.df.m <- assign_vector(my.data, n = n.test)
 ggplot(p.df.m, aes(x = value)) + 
-  +   geom_histogram(binwidth = 1/10) + 
-  +   facet_grid(facets=variable ~ ., scales="free_y") + 
-  +   xlim(0,1) +
-  +   ylab("Count of p-values") +
-  +   xlab("p-values") +
-  +   theme(text = element_text(size = 16))
+  geom_histogram(binwidth = 1/10) + 
+  facet_grid(facets=variable ~ ., scales="free_y") + 
+  xlim(0,1) +
+  ylab("Count of p-values") +
+  xlab("p-values") +
+  theme(text = element_text(size = 16))
+
+
+my.data <- rnorm(n.rand)
+my.data.2 <- rt(n.rand, df = 20)
+# Trim off the tails
+my.data <- my.data[which(my.data < 3 & my.data > -3)]
+# Add in tails from the other distribution
+my.data <- c(my.data, my.data.2[which(my.data.2 < -3 | my.data.2 > 3)])
+
+my.data <- rlnorm(n.rand, 0, 0.4)
+qplot(my.data, geom = "histogram",binwidth=range/15) + xlab("x")
