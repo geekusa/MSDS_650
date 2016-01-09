@@ -18,7 +18,7 @@ autoencoder - https://cran.r-project.org/web/packages/autoencoder/autoencoder.pd
 bgmm - https://cran.r-project.org/web/packages/bgmm/bgmm.pdf\\
 cclust - https://cran.r-project.org/web/packages/cclust/cclust.pdf\\
 som - https://cran.r-project.org/web/packages/som/som.pdf\\
-The measures of quality of the learning algorithm you would expect to see for unsupervised learning gets a bit trickier. Whereas with supervised learning you have a training set, so a portion of this can be held back to test the performance but with unsupervised there is no such training set. I think in this case it depends on what is being classified, for example if it is something where someone has domain knowledge then that person could hand label some data as a “gold standard” to compare against—comparing accuracy. With my example, I find the “eye-test” seemed to be the best. I chose to work with data for the top 50 quarterbacks in the NFL up through week 12. When I was trying to decide how many clusters to have the quarterbacks separated into, after plotting several clusters, it seemed obvious that there were 3 distinct tiers and that 4, 5 were too many levels.\\
+The measures of quality of the learning algorithm you would expect to see for unsupervised learning gets a bit trickier. Whereas with supervised learning you have a training set, so a portion of this can be held back to test the performance but with unsupervised there is no such training set. I think in this case it depends on what is being classified, for example if it is something where someone has domain knowledge then that person could hand label some data as a “gold standard” to compare against—comparing accuracy of the model's predictions. With my example, I find the “eye-test” seemed to be the best--meaning what looked the best. I chose to work with data for the top 50 quarterbacks in the NFL up through week 12. When I was trying to decide how many clusters to have the quarterbacks separated into, after plotting several clusters, it seemed obvious that there were 3 distinct tiers and that 4, 5 (and even up to 10) were too many levels.\\
 \subsection*{Example}
 As I mentioned above, I chose for my example to use the same kmeans exercise as was given with the assignment as an example but exploring NFL quarterback statistics with it. First I needed to change my data to only numeric as kmeans does not appear to work with anything else. I elected to move the player names to the rownames of the dataframe and then removed the team and position column:
 \begin{verbatim}
@@ -57,15 +57,15 @@ Picture of the 3, 4, 5, and 10 clusters:
 \hfill
 \raisebox{-.6\height}{\includegraphics[width=8cm]{yardsVsRating10Clust.png}}%
 \par
-4 doesn't seem too bad having a top tier with 5 elite players, but it really seemed like there was a natural 3 group break. I then began trying many different statistics against each other. The thing I found most interesting is that seeing the original cluster places a context in your mind and then when viewing other stats where the group clustering is very muddy, you can still pick out the 3 groups and see how they relate. An example of this is Completion Percentage versus Rating and versus Ranking:
+4 doesn't seem too bad having a top tier with 5 elite players, but it is strange that this group disappears when it moves to 5 clusters. It really seemed like there was a natural 3 group break. I then began trying many different statistics against each other. The thing I found most interesting is that seeing the original cluster places a context in your mind and then when viewing other stats where the group clustering is very muddy, you can still pick out the 3 groups and see how they relate. An example of this is Completion Percentage versus Rating and versus Ranking:
 \par
 \raisebox{-.6\height}{
 \includegraphics[width=8cm]{compPctVsRating.png}}%
 \hfill
 \raisebox{-.6\height}{\includegraphics[width=8cm]{compPctVsRanking.png}}%
 \par
-Here we see the groups mixed together on the versus Rating graph but because of the previous knowledge of the 3 groups we still get an idea how those groups relate. We can see that some players with not a lot of yards--therefore lower ranked--have a decent passer rating and completion percentage, some even have better stats than the top tier. When we look at it instead against ranking the groups separate again. In this graphic we can see that the tier 1 and 2 groups have less variation in completion percentage compared to the tier 3 group.\\
-Other interesting things I found is that First Downs with how they relate to Yards and Touchdowns clearly follow what looks like a straight line indicating a strong relationship:
+Here we see the groups mixed together on the versus Rating graph but because of the previous knowledge of the 3 groups we still get an idea how those groups relate. We can see that some players with not a lot of yards--therefore lower ranked--have a decent passer rating and completion percentage, some even have better stats than the top tier. When we look at it instead against Ranking the groups separate again. In this graphic we can see that the tier 1 and 2 groups have less variation in Completion Percentage compared to the tier 3 group.
+\par Other interesting things I found is that First Downs with how they relate to Yards and Touchdowns clearly follow what looks like a straight line indicating a strong relationship:
 \pagebreak
 \par
 \raisebox{-.6\height}{
@@ -80,8 +80,8 @@ But then not so much versus Sacks or Rating:
 \hfill
 \raisebox{-.6\height}{\includegraphics[width=8cm]{firstdownsVsRating.png}}%
 \par
-What is also interesting about First Downs on these 4 figures is that the 3 group tier stays quite separated from each other.\\
-Another interesting find is that there appears to be a correlation between a higher number of completions--and even attempts--with passer rating. And again the 3 tiers stay separated nicely:
+What is also interesting about First Downs on these 4 figures is that the 3 group tier stays quite separated from each other.
+\par Another interesting find is that there appears to be a correlation between Passer Rating and having a higher number of Attempts. Of course a high number of Completions would correlate as well, but it would seem to get a high Passer Rating a lot of Attempts need to be made. And again the 3 tiers stay separated nicely:
 \par
 \raisebox{-.6\height}{
 \includegraphics[width=8cm]{completionsVsRating.png}}%

@@ -1,0 +1,136 @@
+\documentclass[10pt]{article}
+\usepackage[usenames]{color} %used for font color
+\usepackage{amssymb} %maths
+\usepackage{fancyvrb}
+\usepackage{amsmath} %maths
+\usepackage[utf8]{inputenc} %useful to type directly diacritic characters
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{graphicx,wrapfig}
+\usepackage{booktabs}
+\usepackage{multicol}
+\begin{document}
+\subsection*{MSDS650 Week 8 Linear Programming Assignment - Nathan Worsham}
+I first tried doing the python excercise with the happiness based on wedding guest seatings, but I was having trouble following the logic of the excercise. This might partially be because the python code made frequent use of list comprehension which can make python code tough to read, also it wasn't very clear what was trying to be accomplished. So instead I worked on the R excercise with a farmer trying to maximize profit from 2 different crops. The problem was very clear and the result we were after was also very clear.
+I first needed to install the package \verb|lpSolveAPI| and then load the package:
+\begin{verbatim}
+> install.packages("lpSolveAPI")
+trying URL 'http://cran.rstudio.com/bin/macosx/mavericks/contrib/3.2/lpSolveAPI_5.5.2.0-14.tgz'
+Content type 'application/x-gzip' length 1311753 bytes (1.3 MB)
+==================================================
+downloaded 1.3 MB
+The downloaded binary packages are in
+	/var/folders/8s/f9vh3ckj0m98v0ykc52r9lpr0000gp/T//RtmpaRwcQP/downloaded_packages
+> library("lpSolveAPI")
+\end{verbatim}
+Next we are instructed to create a linear program model object with 0 rows and 2 columns, and then set the paramaters to the model. The options for sense are "max" or "min" specifying whether the model is a maximization or a minimization problem, in this case it is a maximization problem, so we use "max".
+\begin{verbatim}
+> lprec <- make.lp(0, 2)
+Warning messages:
+1: In .HTMLsearch(query) : Unrecognized search field: title
+2: In .HTMLsearch(query) : Unrecognized search field: keyword
+3: In .HTMLsearch(query) : Unrecognized search field: alias
+> lp.control(lprec, sense="max")
+$anti.degen
+[1] "fixedvars" "stalling" 
+$basis.crash
+[1] "none"
+$bb.depthlimit
+[1] -50
+$bb.floorfirst
+[1] "automatic"
+$bb.rule
+[1] "pseudononint" "greedy"       "dynamic"      "rcostfixing" 
+$break.at.first
+[1] FALSE
+$break.at.value
+[1] 1e+30
+$epsilon
+      epsb       epsd      epsel     epsint epsperturb   epspivot 
+     1e-10      1e-09      1e-12      1e-07      1e-05      2e-07 
+$improve
+[1] "dualfeas" "thetagap"
+$infinite
+[1] 1e+30
+$maxpivot
+[1] 250
+$mip.gap
+absolute relative 
+   1e-11    1e-11 
+$negrange
+[1] -1e+06
+$obj.in.basis
+[1] TRUE
+$pivoting
+[1] "devex"    "adaptive"
+$presolve
+[1] "none"
+$scalelimit
+[1] 5
+$scaling
+[1] "geometric"   "equilibrate" "integers"   
+$sense
+[1] "maximize"
+$simplextype
+NULL
+$timeout
+[1] 0
+$verbose
+[1] "neutral"
+\end{verbatim}
+Picture of the 3, 4, 5, and 10 clusters:
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{yardsVsRating.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{yardsVsRating4Clust.png}}%
+\par
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{yardsVsRating5Clust.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{yardsVsRating10Clust.png}}%
+\par
+4 doesn't seem too bad having a top tier with 5 elite players, but it really seemed like there was a natural 3 group break. I then began trying many different statistics against each other. The thing I found most interesting is that seeing the original cluster places a context in your mind and then when viewing other stats where the group clustering is very muddy, you can still pick out the 3 groups and see how they relate. An example of this is Completion Percentage versus Rating and versus Ranking:
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{compPctVsRating.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{compPctVsRanking.png}}%
+\par
+Here we see the groups mixed together on the versus Rating graph but because of the previous knowledge of the 3 groups we still get an idea how those groups relate. We can see that some players with not a lot of yards--therefore lower ranked--have a decent passer rating and completion percentage, some even have better stats than the top tier. When we look at it instead against ranking the groups separate again. In this graphic we can see that the tier 1 and 2 groups have less variation in completion percentage compared to the tier 3 group.\\
+Other interesting things I found is that First Downs with how they relate to Yards and Touchdowns clearly follow what looks like a straight line indicating a strong relationship:
+\pagebreak
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{firstdownsVsYards.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{firstdownsVsTouchdowns.png}}%
+\par
+But then not so much versus Sacks or Rating:
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{firstdownsVsSacks.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{firstdownsVsRating.png}}%
+\par
+What is also interesting about First Downs on these 4 figures is that the 3 group tier stays quite separated from each other.\\
+Another interesting find is that there appears to be a correlation between a higher number of completions--and even attempts--with passer rating. And again the 3 tiers stay separated nicely:
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{completionsVsRating.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{attemptsVsRating.png}}%
+\par
+Finally, looking at how negative stats (Sacks and Interceptions) correlate with ranking. One really interesting find is that Sacks as they relate to the top tier, is that the top tier gets sacked more than the other groups--especially more than group 3. This seems to hold mostly true with interceptions as well:
+\par
+\raisebox{-.6\height}{
+\includegraphics[width=8cm]{sacksVsRanking.png}}%
+\hfill
+\raisebox{-.6\height}{\includegraphics[width=8cm]{intVsRanking.png}}%
+\par
+Considering that the ranking is based on number of yards, I suppose this makes some sense as to get a lot of yards a player needs to play a lot of time, therefore increasing the chances of sacks and interceptions. 
+\subsection*{References}
+Epstein, David. n.d. Retrieved from https://www.ics.uci.edu/~eppstein/280/cluster.html
+Mathworks.com, 2015. Retrieved from http://www.mathworks.com/discovery/unsupervised-learning.html
+NFL.com, 2015. Retrieved from http://www.nfl.com
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  4 DEC 2015 12:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 DEC 2015 11:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -759,12 +759,12 @@ Here is how much of TeX's memory you used:
  7147 multiletter control sequences out of 15000+600000
  4413 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,32p,933b,140s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,6n,32p,1010b,140s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/font
 s/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmtt10.pfb>
-Output written on week7_Unsupervised_assignment.pdf (4 pages, 308159 bytes).
+Output written on week7_Unsupervised_assignment.pdf (4 pages, 308464 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  20 compressed objects within 1 object stream
